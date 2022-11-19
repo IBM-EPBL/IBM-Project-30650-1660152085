@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="p-4">
+    <h3 class="center">All Transactions</h3>
+    <div class="container rounded bg-light p-3">
+        <table class="table m-4 ">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Note</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in data['transactions'] %}
+                    <tr>
+                        <td>{{transaction['type']}}</td>
+                        <td>{{transaction['amount']}}</td>
+                        <td>{{transaction['category']}}</td>
+                        <td>{{transaction['note']}}</td>
+                        <td>{{transaction['time']}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}
