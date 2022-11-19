@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container bg-dark bg-opacity-25 rounded col-6">
+        <div class="m-2 text-center">
+            <strong>LOGIN</strong> 
+        </div>
+        {%if data.error%}
+            <div class="m-2 alert alert-danger" role="alert">
+                {{data.error}}
+            </div>
+        {%endif%}
+        <form action="/login" method="post">
+            <div class="mb-2 form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" name="email" id="email" class="form-control" value="{{data.email or ''}}" required>
+            </div>
+            <div class="mb-2 form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <input type="submit" value="Login" class="btn btn-dark">
+        </form>
+        <div class="m-2 text-center">
+            Don't have an account? <a href="/register">Register Here</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
