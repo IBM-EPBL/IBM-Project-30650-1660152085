@@ -18,10 +18,10 @@
                     <div class="row">
                         <div class="col">
                             <span class="fs-4">Balance:</span>
-                            <span class="fs-3">{{data['balance']}}</span>
+                            <span class="fs-3">{{data['limit'] - data['expense']}}</span>
                             <br>
                             <span class="fs-6">Monthly Limit:</span>
-                            <span class="fs-6">{{data['balance']}}</span>
+                            <span class="fs-6">{{data['limit']}}</span>
                         </div>
                         <div class="col d-flex justify-content-end me-3 align-items-center">
                             <button type="button" class="btn btn-dark text-center" data-toggle="modal" data-target="#setLimit">Set Limit</button>

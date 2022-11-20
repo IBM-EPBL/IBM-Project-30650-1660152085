@@ -56,7 +56,7 @@ def dashboard():
             income += transaction['amount']
         else:
             expense += transaction['amount']
-    return render_template("dashboard.html", data={"username": get_user('name'), "transactions": alltransactions[0:5], "balance": "09", "income":income,"expense":expense})
+    return render_template("dashboard.html", data={"username": get_user('name'), "transactions": alltransactions[0:5], "limit":get_user('limit'), "income":income,"expense":expense})
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -118,7 +118,7 @@ def get_user(data):
     result = ibm_db.exec_immediate(
         conn, "SELECT * FROM USERS WHERE EMAIL='"+email+"'")
     while ibm_db.fetch_row(result) != False:
-        return str(ibm_db.result(result, 0 if data == 'uid' else 1))
+        return str(ibm_db.result(result, 0 if data == 'uid' else (1 if data=="name" else 3)))
     return None
 
 
