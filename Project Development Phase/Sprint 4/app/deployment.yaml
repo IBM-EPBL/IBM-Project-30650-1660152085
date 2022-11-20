@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+ kind: Deployment
+ metadata:
+   name: expensetracker-deployment
+ spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       app: expensetracker
+   template:
+     metadata:
+       labels:
+         app: expensetracker
+     spec:
+       containers:
+       - name: expensetracker
+         image: us.icr.io/expensetracker/expensetracker
+         imagePullPolicy: Always
+         ports:
+         - containerPort: 5000
