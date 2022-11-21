@@ -51,12 +51,13 @@ def dashboard():
     alltransactions = all_transactions()
     income = 0 
     expense = 0
+    limit = int(get_user('limit'))
     for transaction in alltransactions:
         if transaction['type'] == 'Income':
             income += transaction['amount']
         else:
             expense += transaction['amount']
-    return render_template("dashboard.html", data={"username": get_user('name'), "transactions": alltransactions[0:5], "limit":get_user('limit'), "income":income,"expense":expense})
+    return render_template("dashboard.html", data={"username": get_user('name'), "transactions": alltransactions[0:5], "limit":limit, "income":income,"expense":expense})
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -118,7 +119,7 @@ def get_user(data):
     result = ibm_db.exec_immediate(
         conn, "SELECT * FROM USERS WHERE EMAIL='"+email+"'")
     while ibm_db.fetch_row(result) != False:
-        return str(ibm_db.result(result, 0 if data == 'uid' else (1 if data=="name" else 3)))
+        return str(ibm_db.result(result, 0 if data == 'uid' else (1 if data=="name" else 4)))
     return None
 
 
@@ -145,7 +146,7 @@ def add_limit():
     amount = request.form['amount']
     email = session.get('email')
     ibm_db.exec_immediate(
-        conn, "UPDATE USERS WHERE EMAIL='"+email+"' SET MONTHLYLIMIT="+amount)
+        conn, "UPDATE USERS SET MONTHLIMIT="+amount+" WHERE EMAIL='"+email+"' ")
     return redirect(url_for('dashboard'))
 
 
