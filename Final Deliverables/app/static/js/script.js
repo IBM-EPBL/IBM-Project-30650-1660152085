@@ -5,6 +5,28 @@ function daysInThisMonth() {
   return new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 }
 
+
+const income = []
+const expense = []
+
+for(let i=1;i<daysInThisMonth();i++){
+  let inc = 0
+  let exp = 0
+  data.transaction.forEach(transaction => {
+    if(new Date(transaction.time).getDate() == i){
+      if(transaction.type == "Income"){
+        inc += transaction.amount;
+      }else{
+        exp += transaction.amount;
+      }
+      
+    }
+  });
+  income.push(inc)
+  expense.push(exp)
+}
+
+
 const days = Array(daysInThisMonth())
   .fill()
   .map((_, idx) => 1 + idx);
@@ -17,12 +39,12 @@ new Chart(ctx, {
     datasets: [
       {
         label: "Income",
-        data: [30, 40, 2, 2, 33, 23],
+        data: income,
         borderWidth: 1,
       },
       {
         label: "Expenses",
-        data: [20, 10, 3, 50, 20, 3],
+        data: expense,
         borderWidth: 1,
       },
     ],

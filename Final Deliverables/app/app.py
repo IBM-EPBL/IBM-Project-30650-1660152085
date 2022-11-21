@@ -57,7 +57,7 @@ def dashboard():
             income += transaction['amount']
         else:
             expense += transaction['amount']
-    return render_template("dashboard.html", data={"username": get_user('name'), "transactions": alltransactions[0:5], "limit":limit, "income":income,"expense":expense})
+    return render_template("dashboard.html", data={"username": get_user('name'), "transactions": alltransactions[0:5], "limit": limit, "income": income, "expense": expense, "transaction":alltransactions})
 
 
 @app.route('/login', methods=['POST', 'GET'])

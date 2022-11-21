@@ -156,6 +156,9 @@
     <canvas id="graph" width="800" height="200" class="m-3 rounded bg-light"></canvas>
     
 </section>
-
+<script>
+    const data = JSON.parse('{{ data | tojson| safe}}');
+    console.log(data)
+</script>
 
 {% endblock %}
